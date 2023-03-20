@@ -223,9 +223,9 @@ const char * getDeviceUID(AudioDeviceID deviceID) {
     propertyAddress.mSelector = kAudioDevicePropertyDeviceUID;
     
     OSStatus err = AudioObjectGetPropertyData(deviceID, &propertyAddress, 0, NULL, &dataSize, &deviceUID);
-    if (err != noErr) {
+    if (err != 0) {
         // Handle error
-        return NULL;
+        return "";
     }
 
     const char * deviceUID_string = NULL;
@@ -242,7 +242,7 @@ const char * getDeviceUID(AudioDeviceID deviceID) {
     }
     
     CFRelease(deviceUID);
-    return NULL;
+    return "";
 }
 
 AudioDeviceID getRequestedDeviceIDFromUIDSubstring(char * requestedDeviceUID, ASDeviceType typeRequested) {
